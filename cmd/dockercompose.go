@@ -38,6 +38,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=mydb
+    ports:
+       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 `
@@ -48,6 +50,8 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
+    ports:
+       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgres/data
 `
@@ -60,7 +64,10 @@ if cache != "" {
   redis:
     image: %s
     environment:
+      - REDIS_USER=root
       - REDIS_PASSWORD=secret
+    ports:
+    - "6379:6379" 
     volumes:
       - redis_data:/data
 `, getCacheImage(cache))
